@@ -1,18 +1,33 @@
 #!/bin/bash
+
+################################################################################
 # OpenFOAM v2312 Dependencies Installation Script
+################################################################################
 
-# Author: Vinil Vadakkepurakkal
+# Author:
+# Vinil Vadakkepurakkal
 
-# This script installs the dependencies required for OpenFOAM v2312 through CycleCloud Cloud-init.
+# Description:
+# This script installs the dependencies required for OpenFOAM v2312 for Ubuntu 22.04 through CycleCloud Cloud-init.
+# Refer to the official documentation for detailed information on OpenFOAM v2312 dependencies.
 # Refer to https://develop.openfoam.com/Development/openfoam/blob/develop/doc/Requirements.md
-# for detailed information on OpenFOAM v2312 dependencies.
-# OpenMPI is used from the OS image. 
 
-# Update package index
+# Instructions:
+# - Ensure that this script is executed with appropriate permissions.
+# - Make sure you have an active internet connection.
+# - Adjust the script parameters and configurations as needed for your environment.
+
+# For any inquiries or assistance, contact the author.
+
+################################################################################
+# Update Package Index
+################################################################################
 echo "Updating package index..."
 sudo apt update
 
-# Install required dependencies
+################################################################################
+# Install Required Dependencies
+################################################################################
 echo "Installing required dependencies..."
 sudo apt-get install -y \
     build-essential \
