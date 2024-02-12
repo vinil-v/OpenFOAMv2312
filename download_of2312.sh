@@ -20,8 +20,6 @@
 
 # For any questions or issues, feel free to contact the author.
 
-# Happy downloading!
-
 # Set installation directory
 export INSTALL_DIR="$HOME/OpenFOAM"
 mkdir -p "$INSTALL_DIR"
