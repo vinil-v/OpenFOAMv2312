@@ -1,46 +1,64 @@
-#!/bin/bash 
-# OpenFOAM Compilation Script README
-# -----------------------------------
+#!/bin/bash
+
+################################################################################
+# OpenFOAM Compilation Script
+################################################################################
 
 # Description:
-# This script is designed for compiling OpenFOAM-v2312 using Slurm.
-# It automates the compilation process, reducing the compilation time to approximately 30 minutes.
+# This script automates the compilation process of OpenFOAM-v2312 using Slurm.
+# It reduces the compilation time to approximately 30 minutes.
 
 # Author:
 # Vinil Vadakkepurakkal
 
 # Usage:
-# 1. Update the Ntask value according to the number of CPUs in your VM/Machine.
-# 2. Execute the sbatch script to initiate the OpenFOAM compilation process.
+# 1. Update the SLURM parameters such as --ntasks according to your system's configuration.
+# 2. Execute this script with sbatch to start the OpenFOAM compilation process.
 
 # Note:
-# Ensure that your system meets the necessary dependencies for compiling OpenFOAM-v2312.
-# Adjust the script parameters and configurations as needed for your environment.
+# - Ensure your system meets the dependencies for compiling OpenFOAM-v2312.
+# - Adjust script parameters and configurations as needed for your environment.
 
-# For any questions or issues, feel free to contact the author.
+# For inquiries or assistance, please contact the author.
 
 # Enjoy compiling OpenFOAM!
 
+################################################################################
+# SLURM Directives
+################################################################################
 #SBATCH --job-name=OpenFOAMv2312-Build-Job
 #SBATCH --ntasks=96
 #SBATCH --output=%x_%j.out
 #SBATCH --partition=hpc
 
-#lodaing mpi
+################################################################################
+# Load MPI and Prepare Software
+################################################################################
 module purge
 module load mpi/hpcx
-#preparing software location and downloading software
-export INSTALL_DIR=$HOME/OpenFOAM
-#mkdir -p $INSTALL_DIR
-#mkdir -p $HOME/OpenFOAM
-#cd $INSTALL_DIR
-#wget https://dl.openfoam.com/source/v2312/OpenFOAM-v2312.tgz
-#wget https://dl.openfoam.com/source/v2312/ThirdParty-v2312.tgz
-#tar -zxf OpenFOAM-v2312.tgz && tar -zxf ThirdParty-v2312.tgz
-# Building the foam
-. $INSTALL_DIR/OpenFOAM-v2312/etc/bashrc
-cd $INSTALL_DIR/OpenFOAM-v2312/
+
+################################################################################
+# Software Installation and Configuration
+################################################################################
+export INSTALL_DIR="$HOME/OpenFOAM"
+# Downloading and extracting software can be added here
+
+################################################################################
+# Compiling OpenFOAM
+################################################################################
+# Load OpenFOAM environment
+. "$INSTALL_DIR/OpenFOAM-v2312/etc/bashrc"
+cd "$INSTALL_DIR/OpenFOAM-v2312/"
+
+# Set the number of compilation processes
 export WM_NCOMPPROCS=$SLURM_NTASKS
-echo " starting the compiling job `date` " > $HOME/compilejobtime
+
+# Start compilation
+echo "Starting the compilation job at $(date)" > "$HOME/compilejobtime"
 ./Allwmake -j -s -q -l
-echo " finishing the compiling job `date` " >> $HOME/compilejobtime
+echo "Finishing the compilation job at $(date)" >> "$HOME/compilejobtime"
+
+################################################################################
+# Post-compilation Check
+################################################################################
+foamInstallationTest
