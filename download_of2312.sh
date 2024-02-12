@@ -37,4 +37,9 @@ tar -xf OpenFOAM-v2312.tgz
 echo "Extracting ThirdParty package..."
 tar -xf ThirdParty-v2312.tgz
 
+# Cleanup the installables.
+rm -rf OpenFOAM-v2312.tgz
+rm -rf ThirdParty-v2312.tgz
+
 echo "Download and extraction completed."
+
