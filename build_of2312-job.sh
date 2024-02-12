@@ -21,8 +21,6 @@
 
 # For inquiries or assistance, please contact the author.
 
-# Enjoy compiling OpenFOAM!
-
 ################################################################################
 # SLURM Directives
 ################################################################################
@@ -38,15 +36,10 @@ module purge
 module load mpi/hpcx
 
 ################################################################################
-# Software Installation and Configuration
-################################################################################
-export INSTALL_DIR="$HOME/OpenFOAM"
-# Downloading and extracting software can be added here
-
-################################################################################
 # Compiling OpenFOAM
 ################################################################################
 # Load OpenFOAM environment
+export INSTALL_DIR="$HOME/OpenFOAM"
 . "$INSTALL_DIR/OpenFOAM-v2312/etc/bashrc"
 cd "$INSTALL_DIR/OpenFOAM-v2312/"
 
