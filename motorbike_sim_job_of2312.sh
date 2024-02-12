@@ -11,19 +11,17 @@
 # Vinil Vadakkepurakkal
 
 # Instructions:
-# 1. Modify the `#SBATCH --ntasks` parameter according to the desired number of CPUs.
+# 1. Modify the `#SBATCH --ntasks` parameter according to the desired number of CPUs (this script is based on 192 CPUs).
 # 2. Set up the OpenFOAM environment correctly in your system.
 # 3. Place this script in the simulation directory.
 # 4. Ensure the necessary case files are available.
-# 5. Execute the script using `sbatch openfoam_script.sh`.
+# 5. Execute the script using `sbatch motorbike_sim_job_of2312.sh`.
 
 # Notes:
 # - Assumes Slurm job scheduler and MPI are set up.
 # - Adjust paths and commands according to your setup.
 
 # For inquiries or assistance, contact the author.
-
-# Happy simulating!
 
 ################################################################################
 # SLURM Directives
@@ -55,7 +53,7 @@ cp -r "$FOAM_TUTORIALS/incompressible/simpleFoam/motorBike" "$HOME/run"
 cd "$HOME/run/motorBike"
 
 ################################################################################
-# Parameter Setup and Simulation Run
+# Parameter Setup and Simulation Run for 192 CPUs
 ################################################################################
 cp "system/decomposeParDict.6" "system/decomposeParDict.$SLURM_NTASKS"
 sed -i "s/numberOfSubdomains.*/numberOfSubdomains $SLURM_NTASKS;/" "system/decomposeParDict.$SLURM_NTASKS"
